@@ -497,7 +497,7 @@ class OrganizationsController extends BaseController
             'visible_to' => APIHelper::prepareFormFields($this->val($options, 'visibleTo'))
         );
         foreach ($options as $option => $value)
-            if (!isset($_parameters[$option]) && strlen($option) >= 32)
+            if (!isset($_parameters[$option]) && !in_array($option, ['id', 'name', 'owner_id', 'visible_to'], true))
                 $_parameters[$option] = $value;
 
         //call on-before Http callback
