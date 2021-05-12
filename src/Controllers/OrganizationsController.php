@@ -496,6 +496,9 @@ class OrganizationsController extends BaseController
             'owner_id'   => $this->val($options, 'ownerId'),
             'visible_to' => APIHelper::prepareFormFields($this->val($options, 'visibleTo'))
         );
+        foreach ($options as $option => $value)
+            if (!isset($_parameters[$option]) && strlen($option) >= 32)
+                $_parameters[$option] = $value;
 
         //call on-before Http callback
         $_httpRequest = new HttpRequest(HttpMethod::PUT, $_headers, $_queryUrl, $_parameters);
